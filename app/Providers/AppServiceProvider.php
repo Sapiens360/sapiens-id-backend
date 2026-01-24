@@ -2,7 +2,14 @@
 
 namespace App\Providers;
 
-use App\Services\Bases\BaseInstituteService;
+// Controller
+use App\Http\Controllers\Bases\Controller;
+use App\Http\Controllers\Bases\SearcherController;
+use App\Http\Controllers\Concretes\InstituteController;
+use App\Http\Controllers\Contracts\IController;
+use App\Http\Controllers\Contracts\IInstituteController;
+use App\Http\Controllers\Contracts\ISearcherController;
+// Services
 use App\Services\Bases\SearcherService;
 use App\Services\Bases\Service;
 use App\Services\Concretes\InstituteService;
@@ -18,12 +25,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(IService::class, Service::class);
-        $this->app->singleton(IService::class, ISearcherService::class);
-        $this->app->singleton(ISearcherService::class, SearcherService::class);
-        $this->app->singleton(ISearcherService::class, IInstituteService::class);
-        $this->app->singleton(IInstituteService::class, BaseInstituteService::class);
-        $this->app->singleton(BaseInstituteService::class, InstituteService::class);
+        // Services
+        $this->app->bind(IService::class, Service::class);
+        $this->app->bind(ISearcherService::class, SearcherService::class);
+        $this->app->bind(IInstituteService::class, InstituteService::class);
+
+        // Controllers (normalmente NO se bindean, ver nota abajo)
+        $this->app->bind(IController::class, Controller::class);
+        $this->app->bind(ISearcherController::class, SearcherController::class);
+        $this->app->bind(IInstituteController::class, InstituteController::class);
     }
 
     /**

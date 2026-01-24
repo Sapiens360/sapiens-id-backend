@@ -11,7 +11,7 @@ class BaseEntity extends Model
 {
     use HasFactory, HasFlexibleId, SoftDeletes;
 
-    protected string $table = '';
+    protected $table = '';
 
     protected $fillable = [
         'name',

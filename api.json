@@ -1,0 +1,200 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "SapiensID",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "enum": [
+                                                "SapiensID"
+                                            ]
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "enum": [
+                                                "API"
+                                            ]
+                                        },
+                                        "version": {
+                                            "type": "string",
+                                            "enum": [
+                                                "0.0.1+20260103"
+                                            ]
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "enum": [
+                                                "Denis Jorge Gandarillas Delgado"
+                                            ]
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "enum": [
+                                                "sinedsoft"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "type",
+                                        "version",
+                                        "author",
+                                        "company"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sapiens-id/institutes": {
+            "get": {
+                "operationId": "iInstitute.index",
+                "tags": [
+                    "IInstitute"
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "iInstitute.store",
+                "tags": [
+                    "IInstitute"
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/sapiens-id/institutes/by": {
+            "get": {
+                "operationId": "iInstitute.show",
+                "tags": [
+                    "IInstitute"
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/sapiens-id/institutes/search": {
+            "get": {
+                "operationId": "iInstitute.search",
+                "tags": [
+                    "IInstitute"
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/sapiens-id/institutes/id/{id}": {
+            "put": {
+                "operationId": "iInstitute.update",
+                "tags": [
+                    "IInstitute"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "iInstitute.destroy",
+                "tags": [
+                    "IInstitute"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/sapiens-id/institutes/apps/add/{id}": {
+            "put": {
+                "operationId": "iInstitute.addApps",
+                "tags": [
+                    "IInstitute"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    }
+}

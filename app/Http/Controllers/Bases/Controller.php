@@ -25,6 +25,11 @@ abstract class Controller implements IController
         $this->updateRules = $updateRules;
     }
 
+    /**
+     * Responsible for returning a list of the required data
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $direction = strtolower($request->query('direction', 'asc'));

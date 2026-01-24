@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class Category extends BaseEntity
 {
-    protected string $table = "categories";
+    protected $table = "categories";
 
     protected string $idType = 'int';
 

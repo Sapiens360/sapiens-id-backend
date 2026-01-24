@@ -14,6 +14,7 @@ Route::prefix('')->group(function () {
         ], 200);
     });
 
+    
     Route::prefix('sapiens-id')->group(function () {
         Route::prefix('institutes')->group(function () {
             Route::get('', [IInstituteController::class, 'index']);

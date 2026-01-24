@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class Institute extends BaseEntity
 {
-    protected string $table = 'institutes';
+    protected $table = 'institutes';
 
     protected string $idType = 'uuid';
 

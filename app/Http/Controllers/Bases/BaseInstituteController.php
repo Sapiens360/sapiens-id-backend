@@ -15,7 +15,7 @@ abstract class BaseInstituteController extends SearcherController implements IIn
 {
     protected IInstituteService $instituteService;
 
-    protected $createRules = [
+    protected array $createRules = [
         'name' => 'required|string|min:3|max:255',
         'email' => 'required|email|max:191',
         'phone' => 'nullable|string|phone:BO|max:20',
@@ -23,7 +23,7 @@ abstract class BaseInstituteController extends SearcherController implements IIn
         'apps.*' => 'uuid',
     ];
 
-    protected $updateRules = [
+    protected array $updateRules = [
         'name' => 'required|string|min:3|max:255',
         'email' => 'required|email|max:191',
         'phone' => 'nullable|string|phone:BO|max:20',
@@ -31,7 +31,7 @@ abstract class BaseInstituteController extends SearcherController implements IIn
         'apps.*' => 'uuid',
     ];
 
-    public function __construct(ISearcherService $service)
+    public function __construct(IInstituteService $service)
     {
         $this->instituteService = $service;
 
