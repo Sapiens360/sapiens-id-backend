@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class Institute extends BaseEntity
 {
-    protected string $table = "institutes";
+    protected $table = 'institutes';
 
     protected string $idType = 'uuid';
 
@@ -17,11 +17,11 @@ class Institute extends BaseEntity
         $this->fillable = array_merge($this->fillable ?? [], [
             'email',
             'phone',
-            'apps'
+            'apps',
         ]);
 
         $this->casts = array_merge($this->casts ?? [], [
-            'apps' => 'array'
+            'apps' => 'array',
         ]);
     }
 }

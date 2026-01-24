@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class User extends BaseEntity
 {
-    protected string $table = "users";
+    protected $table = "users";
 
     protected string $idType = 'uuid';
 

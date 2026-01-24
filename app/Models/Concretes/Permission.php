@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class Permission extends BaseEntity
 {
-    protected string $table = "permissions";
+    protected $table = "permissions";
 
     protected string $idType = 'int';
 

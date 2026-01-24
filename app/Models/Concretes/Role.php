@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class Role extends BaseEntity
 {
-    protected string $table = "roles";
+    protected $table = "roles";
 
     protected string $idType = 'int';
 

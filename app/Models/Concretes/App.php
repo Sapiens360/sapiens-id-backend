@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class App extends BaseEntity
 {
-    protected string $table = "apps";
+    protected $table = "apps";
     protected string $idType = 'uuid';
 
     public function __construct(array $attributes = [])
