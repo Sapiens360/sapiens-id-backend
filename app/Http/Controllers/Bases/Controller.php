@@ -7,15 +7,17 @@ use App\Models\Responses\Concretes\FailResponse;
 use App\Models\Responses\Concretes\PaginateResponse;
 use App\Models\Responses\Concretes\SuccessResponse;
 use App\Services\Contracts\IService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Validator;
 
 abstract class Controller implements IController
 {
     protected IService $service;
+
     protected array $createRules = [];
+
     protected array $updateRules = [];
 
     public function __construct(IService $service, array $createRules = [], array $updateRules = [])
@@ -25,11 +27,6 @@ abstract class Controller implements IController
         $this->updateRules = $updateRules;
     }
 
-    /**
-     * Responsible for returning a list of the required data
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function index(Request $request)
     {
         $direction = strtolower($request->query('direction', 'asc'));
@@ -60,6 +57,7 @@ abstract class Controller implements IController
         }
 
         $response = new SuccessResponse(200, 'Data correctly obtained', $data);
+
         return $response->toResponse();
     }
 
@@ -71,19 +69,22 @@ abstract class Controller implements IController
         $onlyActive = $request->query('onlyActive') ?? true;
         $filters = $request->query('filters') ?? [];
 
-        if (!$column || !$value) {
+        if (! $column || ! $value) {
             $response = new FailResponse(400, 'Column and value are required', null);
+
             return $response->toResponse();
         }
 
         $data = $this->service->getBy($column, $value, $fail, $onlyActive, $filters);
 
-        if (!$data) {
+        if (! $data) {
             $response = new FailResponse(404, 'Entity not found', null);
+
             return $response->toResponse();
         }
 
         $response = new SuccessResponse(200, 'Data correctly obtained', $data);
+
         return $response->toResponse();
     }
 
@@ -96,6 +97,7 @@ abstract class Controller implements IController
 
         if ($validate->fails()) {
             $response = new FailResponse(422, 'Verify the data sent', $validate->errors());
+
             return $response->toResponse();
         }
 
@@ -103,9 +105,11 @@ abstract class Controller implements IController
             $data = $this->service->create($request->all(), null);
 
             $response = new SuccessResponse(201, 'Object successfully created', $data);
+
             return $response->toResponse();
         } catch (Exception $e) {
             $response = new FailResponse(400, $e->getMessage(), null);
+
             return $response->toResponse();
         }
     }
@@ -119,6 +123,7 @@ abstract class Controller implements IController
 
         if ($validate->fails()) {
             $response = new FailResponse(422, 'Verify the data sent', $validate->errors());
+
             return $response->toResponse();
         }
 
@@ -126,9 +131,11 @@ abstract class Controller implements IController
             $data = $this->service->update($id, $request->all(), null);
 
             $response = new SuccessResponse(200, 'Object successfully updated', $data);
+
             return $response->toResponse();
         } catch (Exception $e) {
             $response = new FailResponse(400, $e->getMessage(), null);
+
             return $response->toResponse();
         }
     }
@@ -139,9 +146,11 @@ abstract class Controller implements IController
             $this->service->delete($id);
 
             $response = new SuccessResponse(200, 'Object successfully deleted', null);
+
             return $response->toResponse();
         } catch (Exception $e) {
             $response = new FailResponse(400, $e->getMessage(), null);
+
             return $response->toResponse();
         }
     }

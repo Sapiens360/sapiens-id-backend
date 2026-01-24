@@ -31,7 +31,9 @@ abstract class SearcherController extends Controller implements ISearcherControl
         $page = (int) ($request->query('page', 0));
         $size = (int) ($request->query('size', 0));
 
-        $data = $this->searcherService->search($value, $direction, $orderBy, $page, $size);
+        $filters = $request->query('filters') ?? [];
+
+        $data = $this->searcherService->search($value, $direction, $filters, $orderBy, $page, $size);
 
         if ($data instanceof LengthAwarePaginator) {
             $response = new PaginateResponse(

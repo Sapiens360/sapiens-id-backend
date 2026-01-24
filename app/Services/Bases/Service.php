@@ -4,10 +4,10 @@ namespace App\Services\Bases;
 
 use App\Services\Contracts\IService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 abstract class Service implements IService
 {
-
     protected Model $model;
 
     public function __construct(Model $model)
@@ -17,12 +17,11 @@ abstract class Service implements IService
 
     public function getAll(
         string $direction = 'asc',
-        array  $filters = [],
+        array $filters = [],
         string $orderBy = 'name',
-        int    $page = 0,
-        int    $size = 0
-    )
-    {
+        int $page = 0,
+        int $size = 0
+    ) {
         $query = $this->model->where($filters)->orderBy($orderBy, $direction);
 
         if ($page > 0 && $size > 0) {
@@ -52,6 +51,7 @@ abstract class Service implements IService
 
     public function create(array $data, ?string $uniqueColumn = null)
     {
+        $data['code'] = $this->generateCode();
         if ($uniqueColumn && isset($data[$uniqueColumn])) {
             $exists = $this->model->where($uniqueColumn, $data[$uniqueColumn])->first();
 
@@ -59,11 +59,12 @@ abstract class Service implements IService
                 throw new \DomainException("Record with {$uniqueColumn} '{$data[$uniqueColumn]}' already exists.");
             }
 
-            if ($exists && !$exists->is_active) {
+            if ($exists && ! $exists->is_active) {
                 $exists->update([
                     'is_active' => true,
-                    'deleted_at' => null
+                    'deleted_at' => null,
                 ]);
+
                 return $exists->refresh();
             }
         }
@@ -89,6 +90,7 @@ abstract class Service implements IService
         }
 
         $record->update($data);
+
         return $record;
     }
 
@@ -105,5 +107,14 @@ abstract class Service implements IService
         }
 
         return true;
+    }
+
+    private function generateCode()
+    {
+        do {
+            $code = Str::random(30);
+        } while ($this->getBy('code', $code, false, false, []));
+
+        return $code;
     }
 }

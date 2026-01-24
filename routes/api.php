@@ -14,7 +14,6 @@ Route::prefix('')->group(function () {
         ], 200);
     });
 
-    
     Route::prefix('sapiens-id')->group(function () {
         Route::prefix('institutes')->group(function () {
             Route::get('', [IInstituteController::class, 'index']);
@@ -22,8 +21,10 @@ Route::prefix('')->group(function () {
             Route::get('search', [IInstituteController::class, 'search']);
             Route::post('', [IInstituteController::class, 'store']);
             Route::put('id/{id}', [IInstituteController::class, 'update']);
-            Route::put('apps/add/{id}', [IInstituteController::class, 'addApps']);
-            Route::put('apps/remove/{id}', [IInstituteController::class, 'removeApps']);
+            Route::prefix('apps')->group(function () {
+                Route::put('add/{id}', [IInstituteController::class, 'addApps']);
+                Route::put('remove/{id}', [IInstituteController::class, 'removeApps']);
+            });
             Route::delete('id/{id}', [IInstituteController::class, 'destroy']);
         });
     });
