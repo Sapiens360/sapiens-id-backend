@@ -3,9 +3,9 @@
 namespace App\Services\Concretes;
 
 use App\Models\Concretes\Institute;
-use App\Services\Bases\Service;
+use App\Services\Bases\BaseInstituteService;
 
-class InstituteService extends Service
+class InstituteService extends BaseInstituteService
 {
     public function __construct(Institute $model)
     {

@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseEntity extends Model
 {
-    use HasFactory, SoftDeletes, HasFlexibleId;
-    protected string $table = "";
+    use HasFactory, HasFlexibleId, SoftDeletes;
+
+    protected string $table = '';
 
     protected $fillable = [
         'name',
         'code',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [

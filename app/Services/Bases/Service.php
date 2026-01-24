@@ -17,11 +17,12 @@ abstract class Service implements IService
 
     public function getAll(
         string $direction = 'asc',
-        array $filters = [],
+        array  $filters = [],
         string $orderBy = 'name',
-        int $page = 0,
-        int $size = 0
-    ) {
+        int    $page = 0,
+        int    $size = 0
+    )
+    {
         $query = $this->model->where($filters)->orderBy($orderBy, $direction);
 
         if ($page > 0 && $size > 0) {
@@ -63,7 +64,7 @@ abstract class Service implements IService
                     'is_active' => true,
                     'deleted_at' => null
                 ]);
-                return $exists;
+                return $exists->refresh();
             }
         }
 
