@@ -13,6 +13,7 @@
         "dedoc/scramble": "^0.13.10",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.23",
         "laravel/tinker": "^2.10.1",
         "propaganistas/laravel-phone": "^6.0"
     },
