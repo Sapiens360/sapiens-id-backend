@@ -53,7 +53,8 @@ abstract class BaseInstituteController extends SearcherController implements IIn
             return $response->toResponse();
         }
 
-        $apps = $request->body('apps');
+        $apps = $request->input('apps');
+
 
         if (empty($apps)) {
             $response = new FailResponse(422, 'App list is empty', null);
@@ -89,7 +90,8 @@ abstract class BaseInstituteController extends SearcherController implements IIn
             return $response->toResponse();
         }
 
-        $apps = $request->body('apps');
+        $apps = $request->input('apps');
+
 
         if (empty($apps)) {
             $response = new FailResponse(422, 'App list is empty', null);

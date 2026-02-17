@@ -10,13 +10,17 @@ abstract class BaseAppController extends SearcherController implements IAppContr
     protected IAppService $appService;
 
     protected array $createRules = [
+        'description' => 'required|string|min:3|max:255',
         'name' => 'required|string|min:3|max:255',
         'version' => 'required|string|max:255',
+        'is_default' => 'required|boolean',
     ];
 
     protected array $updateRules = [
+        'description' => 'string|min:3|max:255',
         'name' => 'string|min:3|max:255',
         'version' => 'string|max:255',
+        'is_default' => 'boolean',
     ];
 
     public function __construct(IAppService $service)

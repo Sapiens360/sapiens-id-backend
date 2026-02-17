@@ -14,7 +14,9 @@ return new class extends Migration {
     {
         Schema::create('apps', function (Blueprint $table) {
             commonColumns($table, 'uuid', true);
+            $table->string('description', 255);
             $table->string('version', 255);
+            $table->boolean('is_default')->default(false);
         });
     }
 

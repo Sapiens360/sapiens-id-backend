@@ -15,7 +15,9 @@ class App extends BaseEntity
         parent::__construct($attributes);
 
         $this->fillable = array_merge($this->fillable ?? [], [
+            'description',
             'version',
+            'is_default',
         ]);
     }
 
