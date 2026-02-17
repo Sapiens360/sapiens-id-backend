@@ -53,7 +53,8 @@ abstract class BaseInstituteController extends SearcherController implements IIn
             return $response->toResponse();
         }
 
-        $apps = $request->body('apps');
+        $apps = $request->input('apps');
+
 
         if (empty($apps)) {
             $response = new FailResponse(422, 'App list is empty', null);
@@ -89,7 +90,8 @@ abstract class BaseInstituteController extends SearcherController implements IIn
             return $response->toResponse();
         }
 
-        $apps = $request->body('apps');
+        $apps = $request->input('apps');
+
 
         if (empty($apps)) {
             $response = new FailResponse(422, 'App list is empty', null);
@@ -100,6 +102,20 @@ abstract class BaseInstituteController extends SearcherController implements IIn
         try {
             $institute = $this->instituteService->removeApps($id, $apps);
             $response = new SuccessResponse(200, 'Apps were removed correctly', $institute);
+
+            return $response->toResponse();
+        } catch (Exception $e) {
+            $response = new FailResponse(400, $e->getMessage(), null);
+
+            return $response->toResponse();
+        }
+    }
+
+    public function verifyAppAccess(string $id, string $code)
+    {
+        try {
+            $result = $this->instituteService->verifyAppAccess($id, $code);
+            $response = new SuccessResponse(200, 'Institute has access to the app.', $result);
 
             return $response->toResponse();
         } catch (Exception $e) {

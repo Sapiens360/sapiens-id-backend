@@ -24,4 +24,12 @@ class Institute extends BaseEntity
             'apps' => 'array',
         ]);
     }
+
+    public function toSearchableArray()
+    {
+        return array_merge(parent::toSearchableArray(), [
+            'email' => $this->email,
+            'phone' => $this->phone,
+        ]);
+    }
 }
