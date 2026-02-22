@@ -36,7 +36,7 @@ abstract class Service implements IService
         return $query->get();
     }
 
-    public function getBy(string $column, string|int $value, bool $fail = true, bool $onlyActive = true, array $filters = [])
+    public function getBy(string $column, string|int $value, bool $fail = true, bool $onlyActive = true, array $filters = []): Model
     {
         $query = $this->model->where($column, $value);
 
@@ -49,17 +49,22 @@ abstract class Service implements IService
         return $fail ? $query->firstOrFail() : $query->first();
     }
 
-    public function create(array $data, ?string $uniqueColumn = null)
+    public function create(array $data, ?string $uniqueColumn = null, ?bool $generateCode = true)
     {
-        $data['code'] = $this->generateCode();
+        if ($generateCode) {
+            $data['code'] = $this->generateCode();
+        }
         if ($uniqueColumn && isset($data[$uniqueColumn])) {
-            $exists = $this->model->where($uniqueColumn, $data[$uniqueColumn])->first();
+            $exists = $this->model
+                ->withTrashed()
+                ->where($uniqueColumn, $data[$uniqueColumn])
+                ->first();
 
-            if ($exists && $exists->is_active) {
-                throw new \DomainException("Record with {$uniqueColumn} '{$data[$uniqueColumn]}' already exists.");
-            }
+            if ($exists) {
+                if ($exists->is_active) {
+                    throw new \DomainException("Record with {$uniqueColumn} '{$data[$uniqueColumn]}' already exists.");
+                }
 
-            if ($exists && ! $exists->is_active) {
                 $exists->update([
                     'is_active' => true,
                     'deleted_at' => null,
@@ -98,12 +103,17 @@ abstract class Service implements IService
     {
         $record = $this->getBy('id', $id);
 
+        if (! $record) {
+            throw new \DomainException('Record not found.');
+        }
+
         if ($force) {
-            $record->forceDelete();
+            $record->delete();
         } else {
-            $record->is_active = false;
-            $record->deleted_at = now();
-            $record->save();
+            $record->update([
+                'is_active' => false,
+                'deleted_at' => now(),
+            ]);
         }
 
         return true;

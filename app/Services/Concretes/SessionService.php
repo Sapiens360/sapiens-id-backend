@@ -3,9 +3,9 @@
 namespace App\Services\Concretes;
 
 use App\Models\Concretes\Session;
-use App\Services\Bases\Service;
+use App\Services\Bases\SearcherService;
 
-class SessionService extends Service
+class SessionService extends SearcherService
 {
     public function __construct(Session $model)
     {
