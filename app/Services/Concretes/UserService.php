@@ -3,9 +3,9 @@
 namespace App\Services\Concretes;
 
 use App\Models\Concretes\User;
-use App\Services\Bases\Service;
+use App\Services\Bases\SearcherService;
 
-class UserService extends Service
+class UserService extends SearcherService
 {
     public function __construct(User $model)
     {

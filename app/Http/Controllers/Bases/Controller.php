@@ -35,8 +35,8 @@ abstract class Controller implements IController
         $orderBy = $request->query('orderBy', 'name');
         $orderBy = $orderBy ? $orderBy : 'name';
 
-        $page = (int) ($request->query('page', 0));
-        $size = (int) ($request->query('size', 0));
+        $page = (int)($request->query('page', 0));
+        $size = (int)($request->query('size', 0));
 
         $filters = $request->query('filters') ?? [];
 
@@ -69,7 +69,7 @@ abstract class Controller implements IController
         $onlyActive = $request->query('onlyActive') ?? true;
         $filters = $request->query('filters') ?? [];
 
-        if (! $column || ! $value) {
+        if (!$column || !$value) {
             $response = new FailResponse(400, 'Column and value are required', null);
 
             return $response->toResponse();
@@ -77,7 +77,7 @@ abstract class Controller implements IController
 
         $data = $this->service->getBy($column, $value, $fail, $onlyActive, $filters);
 
-        if (! $data) {
+        if (!$data) {
             $response = new FailResponse(404, 'Entity not found', null);
 
             return $response->toResponse();
@@ -101,8 +101,11 @@ abstract class Controller implements IController
             return $response->toResponse();
         }
 
+        $uniqueColumn = $request->query('uniqueColumn');
+        $generateCode = $request->query('generateCode');
+
         try {
-            $data = $this->service->create($request->all(), null);
+            $data = $this->service->create($request->all(), $uniqueColumn, $generateCode);
 
             $response = new SuccessResponse(201, 'Object successfully created', $data);
 

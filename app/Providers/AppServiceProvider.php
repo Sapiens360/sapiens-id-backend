@@ -2,21 +2,23 @@
 
 namespace App\Providers;
 
-// Controller
 use App\Http\Controllers\Bases\Controller;
 use App\Http\Controllers\Bases\SearcherController;
 use App\Http\Controllers\Concretes\AppController;
+use App\Http\Controllers\Concretes\CategoryController;
 use App\Http\Controllers\Concretes\InstituteController;
 use App\Http\Controllers\Contracts\IAppController;
+use App\Http\Controllers\Contracts\ICategoryController;
 use App\Http\Controllers\Contracts\IController;
 use App\Http\Controllers\Contracts\IInstituteController;
 use App\Http\Controllers\Contracts\ISearcherController;
-// Services
 use App\Services\Bases\SearcherService;
 use App\Services\Bases\Service;
 use App\Services\Concretes\AppService;
+use App\Services\Concretes\CategoryService;
 use App\Services\Concretes\InstituteService;
 use App\Services\Contracts\IAppService;
+use App\Services\Contracts\ICategoryService;
 use App\Services\Contracts\IInstituteService;
 use App\Services\Contracts\ISearcherService;
 use App\Services\Contracts\IService;
@@ -37,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IInstituteService::class, InstituteService::class);
         // app
         $this->app->bind(IAppService::class, AppService::class);
+        // category
+        $this->app->bind(ICategoryService::class, CategoryService::class);
 
         // Controllers
         // general
@@ -46,6 +50,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IInstituteController::class, InstituteController::class);
         // app
         $this->app->bind(IAppController::class, AppController::class);
+        // category
+        $this->app->bind(ICategoryController::class, CategoryController::class);
     }
 
     /**

@@ -8,7 +8,7 @@ interface IService
 
     public function getBy(string $column, string|int $value, bool $fail, bool $onlyActive, array $filters);
 
-    public function create(array $data, ?string $uniqueColumn);
+    public function create(array $data, ?string $uniqueColumn, ?bool $generateCode);
 
     public function update(string|int $id, array $data, ?string $uniqueColumn);
 

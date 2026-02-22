@@ -14,7 +14,7 @@ function commonColumns(Blueprint $table, string $idType = 'uuid', bool $hasCode 
     $table->string('name', 255);
 
     if ($hasCode) {
-        $table->string('code', 30)->unique();
+        $table->string('code', length: 255)->unique();
     }
 
     $table->boolean('is_active')->default(true);

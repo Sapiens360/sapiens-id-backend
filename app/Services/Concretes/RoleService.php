@@ -3,9 +3,9 @@
 namespace App\Services\Concretes;
 
 use App\Models\Concretes\Role;
-use App\Services\Bases\Service;
+use App\Services\Bases\SearcherService;
 
-class RoleService extends Service
+class RoleService extends SearcherService
 {
     public function __construct(Role $model)
     {

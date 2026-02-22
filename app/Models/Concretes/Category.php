@@ -16,7 +16,6 @@ class Category extends BaseEntity
 
         $this->fillable = array_merge($this->fillable ?? [], [
             'app',
-            'parent'
         ]);
 
         $this->casts = array_merge($this->casts ?? [], [
