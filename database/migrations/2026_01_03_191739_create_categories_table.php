@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            commonColumns($table, 'int', true);
-            $table->foreignUuid('app')->constrained('apps')->cascadeOnDelete()->cascadeOnUpdate();
+            commonColumns($table, true, false);
+            $table->foreignUuid('app_id')->constrained('apps')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -17,7 +17,6 @@ class App extends BaseEntity
         $this->fillable = array_merge($this->fillable ?? [], [
             'description',
             'version',
-            'is_default',
         ]);
     }
 

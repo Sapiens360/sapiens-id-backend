@@ -12,13 +12,22 @@ abstract class BaseAppService extends SearcherService implements IAppService
     public function __construct(App $app)
     {
         $this->app = $app;
+
         return parent::__construct($app);
     }
 
-    public function verifyExistByCode(string $code): ?string
+    public function create(array $data, ?string $uniqueColumn = null, ?bool $generateCode = false): App
     {
-        $app = $this->getBy('code', $code);
+        $data['code'] = $this->generateCode($data['name']);
 
-        return empty($app) ? null : $app->id;
+        return parent::create($data, $uniqueColumn, $generateCode);
+    }
+
+    private function generateCode(string $code): string
+    {
+        $result = trim($code);
+        $result = preg_replace('/\s+/', '_', $result);
+
+        return mb_strtoupper($result, 'UTF-8');
     }
 }

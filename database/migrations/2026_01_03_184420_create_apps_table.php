@@ -6,17 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 require_once database_path('migrations/helpers/common_columns.php');
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('apps', function (Blueprint $table) {
-            commonColumns($table, 'uuid', true);
+            commonColumns($table, true, true);
             $table->string('description', 255);
             $table->string('version', 255);
-            $table->boolean('is_default')->default(false);
         });
     }
 

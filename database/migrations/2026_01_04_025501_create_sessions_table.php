@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('agent', 512)->default('');
             $table->string('ip', 45);
             $table->string('browser', 50)->nullable();
@@ -22,7 +22,10 @@ return new class extends Migration {
             $table->boolean('is_trusted')->default(false);
             $table->string('country', 255);
             $table->string('city', 255);
+            $table->string('refresh_token_hash', 255)->nullable();
+            $table->timestamp('refresh_expires_at')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_blocked')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,19 +2,17 @@
 
 use Illuminate\Database\Schema\Blueprint;
 
-function commonColumns(Blueprint $table, string $idType = 'uuid', bool $hasCode = false): void
+function commonColumns(Blueprint $table, bool $hasCode = false, bool $hasImage = false): void
 {
-    $idTypes = [
-        'uuid' => fn () => $table->uuid('id')->primary(),
-        'int' => fn () => $table->id(),
-    ];
-
-    ($idTypes[$idType] ?? fn () => $table->id())();
-
+    $table->uuid('id')->primary();
     $table->string('name', 255);
 
     if ($hasCode) {
         $table->string('code', length: 255)->unique();
+    }
+
+    if ($hasImage) {
+        $table->string('image_url', 255);
     }
 
     $table->boolean('is_active')->default(true);

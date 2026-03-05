@@ -9,12 +9,12 @@ class BaseCategoryController extends SearcherController implements ICategoryCont
 {
     protected array $createRules = [
         'name' => 'required|string|max:255',
-        'app' => 'required|uuid|exists:apps,id',
+        'app_id' => 'required|uuid|exists:apps,id',
     ];
 
     protected array $updateRules = [
         'name' => 'string|max:255',
-        'app' => 'uuid|exists:apps,id',
+        'app_id' => 'uuid|exists:apps,id',
     ];
 
     public function __construct(ICategoryService $service)

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model
 {
+
     protected $table = "sessions";
 
     protected $fillable = [
@@ -19,12 +20,16 @@ class Session extends Model
         'is_trusted',
         'country',
         'city',
-        'is_active'
+        'refresh_token_hash',
+        'refresh_expires_at',
+        'is_active',
+        'is_blocked'
     ];
 
     protected $casts = [
         'id' => 'string',
         'user' => 'string',
         'is_active' => 'boolean',
+        'is_blocked' => 'boolean',
     ];
 }

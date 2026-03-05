@@ -6,17 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 require_once database_path('migrations/helpers/common_columns.php');
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('institutes', function (Blueprint $table) {
-            commonColumns($table, 'uuid', true);
+            commonColumns($table, true, true);
             $table->string('email', 191)->unique();
             $table->string('phone', 20)->nullable();
-            $table->json('apps');
         });
     }
 

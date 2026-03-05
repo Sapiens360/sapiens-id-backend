@@ -2,13 +2,8 @@
 
 namespace App\Services\Concretes;
 
-use App\Models\Concretes\Permission;
-use App\Services\Bases\SearcherService;
+use App\Services\Bases\BasePermissionService;
 
-class PermissionService extends SearcherService
+class PermissionService extends BasePermissionService
 {
-    public function __construct(Permission $model)
-    {
-        return parent::__construct($model);
-    }
 }

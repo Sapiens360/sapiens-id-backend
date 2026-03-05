@@ -36,7 +36,7 @@ abstract class Service implements IService
         return $query->get();
     }
 
-    public function getBy(string $column, string|int $value, bool $fail = true, bool $onlyActive = true, array $filters = []): Model
+    public function getBy(string $column, string|int $value, bool $fail = true, bool $onlyActive = true, array $filters = []): ?Model
     {
         $query = $this->model->where($column, $value);
 

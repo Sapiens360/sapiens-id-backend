@@ -1,8 +1,23 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,phpstorm+all,laravel,dotenv,phpunit
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,phpstorm+all,laravel,dotenv,phpunit
+# Created by https://www.toptal.com/developers/gitignore/api/phpunit,phpstorm+all,dotenv,laravel,visualstudiocode,git
+# Edit at https://www.toptal.com/developers/gitignore?templates=phpunit,phpstorm+all,dotenv,laravel,visualstudiocode,git
 
 ### dotenv ###
 .env
+
+### Git ###
+# Created by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+*.orig
+
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
 
 ### Laravel ###
 /vendor/
@@ -149,4 +164,4 @@ fabric.properties
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,phpstorm+all,laravel,dotenv,phpunit
+# End of https://www.toptal.com/developers/gitignore/api/phpunit,phpstorm+all,dotenv,laravel,visualstudiocode,git

@@ -17,11 +17,6 @@ class Institute extends BaseEntity
         $this->fillable = array_merge($this->fillable ?? [], [
             'email',
             'phone',
-            'apps',
-        ]);
-
-        $this->casts = array_merge($this->casts ?? [], [
-            'apps' => 'array',
         ]);
     }
 

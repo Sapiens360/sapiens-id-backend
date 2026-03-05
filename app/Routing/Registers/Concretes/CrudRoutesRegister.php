@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 class CrudRoutesRegister implements IRoutesRegister
 {
-
     public function register(string $route, string $controller): void
     {
         Route::prefix($route)->controller($controller)->group(function () {

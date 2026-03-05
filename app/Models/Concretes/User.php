@@ -6,7 +6,7 @@ use App\Models\Bases\BaseEntity;
 
 class User extends BaseEntity
 {
-    protected $table = "users";
+    protected $table = 'users';
 
     protected string $idType = 'uuid';
 
@@ -23,11 +23,23 @@ class User extends BaseEntity
             'phone',
             'password',
             'institute',
-            'role'
+            'role',
         ]);
 
         $this->casts = array_merge($this->casts ?? [], [
-            'institute' => 'string'
+            'institute' => 'string',
+        ]);
+    }
+
+    public function toSearchableArray()
+    {
+        return array_merge(parent::toSearchableArray(), [
+            'firstnames' => $this->firstnames,
+            'lastnames' => $this->lastnames,
+            'shortname' => $this->shortname,
+            'username' => $this->username,
+            'email' => $this->email,
+            'phone' => $this->phone,
         ]);
     }
 }

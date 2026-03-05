@@ -6,14 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 require_once database_path('migrations/helpers/common_columns.php');
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            commonColumns($table, 'uuid', false);
+            commonColumns($table, false, true);
             $table->string('firstnames', 255);
             $table->string('lastnames', 255);
             $table->string('shortname', 255);
@@ -21,8 +22,8 @@ return new class extends Migration {
             $table->string('email', 191)->unique();
             $table->string('phone', 20)->nullable();
             $table->string('password', 255);
-            $table->foreignUuid('institute')->constrained('institutes')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('role')->constrained('roles')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('institute_id')->constrained('institutes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('role_id')->constrained('roles')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

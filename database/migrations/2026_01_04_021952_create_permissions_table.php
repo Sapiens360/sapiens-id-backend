@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 require_once database_path('migrations/helpers/common_columns.php');
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('permissions', function (Blueprint $table) {
-            commonColumns($table, 'int', true);
-            $table->foreignId('category')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
+            commonColumns($table, true, false);
+            $table->foreignUuid('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

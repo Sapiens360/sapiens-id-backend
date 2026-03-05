@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('roles', function (Blueprint $table) {
-            commonColumns($table, 'int', false);
+            commonColumns($table, false, false);
             $table->json('permissions');
         });
     }

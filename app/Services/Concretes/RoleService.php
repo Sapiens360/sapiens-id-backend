@@ -2,13 +2,8 @@
 
 namespace App\Services\Concretes;
 
-use App\Models\Concretes\Role;
-use App\Services\Bases\SearcherService;
+use App\Services\Bases\BaseRoleService;
 
-class RoleService extends SearcherService
+class RoleService extends BaseRoleService
 {
-    public function __construct(Role $model)
-    {
-        return parent::__construct($model);
-    }
 }
